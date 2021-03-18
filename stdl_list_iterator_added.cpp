@@ -181,24 +181,24 @@ public:
             temp->next=input;
             }
         }
-        //reason for doing this when we erase or pop an element then next and previous part are referening to
-        //node they were inserted in order in. Sort just puts element in between but does change tail->prev part
-        //or next part address, so after sorting element are pushed-back in a logical order (copy-constructor and
-        //= operator use push-back so address are managed how they are inserted)
-        list<t> lst=*this;
-        make_empty();
-        *this=lst;
     }
     //sort function for list
-    //average O(n6)
-    //worse O(n7)
-    void sort(){
-        list<t> l2=*this;
-        make_empty();
-        node<t>*temp=l2.head;
-        while(temp!=NULL){
-            insertsorted(temp->data);
-            temp=temp->next;
+    //O(n^2)
+     void sort(){
+        node<t>*cur=head;
+        if(head==NULL)
+            throw "NULL \n";
+        while(cur!=NULL){
+            node<t>*hold=cur;
+            while(cur->next!=NULL){
+                if(hold->data > cur->next->data){
+                    t s=hold->data;
+                    hold->data=cur->next->data;
+                    cur->next->data=s;
+                }
+                cur=cur->next;
+            }
+            cur=hold->next;
         }
     }
     //this function will return pointer to first/beginning node for iterator

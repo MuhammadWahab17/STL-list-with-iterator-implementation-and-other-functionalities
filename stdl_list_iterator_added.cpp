@@ -155,8 +155,8 @@ public:
         }
     }
     //insert funtion to insert values in sorted order
-    //worse case O(n4)
-    //best case O(n3)
+    //worse case O(n)
+    //best case O(1)
     void insertsorted(const t&val){
         node<t> *input;
         if(head==NULL){
